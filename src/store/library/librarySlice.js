@@ -1,16 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-//   isreserving: false,
+  isreserving: false,
   messageSaved:'',
-  books:[],
-  reservingBook:null
-//   activeNote:{
+  allBooks:[],
+  avtiveReserva:null,
+  booksReserve:[],
+//   bookResever:{
 //       id:'abc',
 //       title:'',
-//       body:'',
+//       Author:'',
+//       Category:'',
+//       description:'',
+//       status:'' reserved, not-reserved,
 //       date:445565,
-//       imagesUrl:[]
 //   }
 }
 
@@ -18,13 +21,32 @@ export const librarySlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    // savingNote:(state)=>{
-    //   state.isSaving=true;
-    // },
-    // addNewEmptyNode: (state, action) => {
-    //   state.notes.push(action.payload); 
-    // //   state.isSaving = false;
-    // },
+    reservingBook:(state)=>{
+      state.isreserving=true;
+    },
+    addNewReserve: (state, action) => {
+      state.booksReserve.push(action.payload); 
+      state.isreserving = false;
+    },
+    setAllBooks:(state, action)=>{
+      state.allBooks=action.payload;
+    },
+
+    setAllBooksReserve : ( state, action)=>{
+        state.booksReserve=action.payload;
+    },
+    deleteReserve: (state, {payload})=>{
+        console.log(payload.id);
+        state.booksReserve = state.booksReserve.filter( book =>book.id!==payload);
+      //   state.activeNote=null;
+    },
+
+    setActiveReserva:( state, action) =>{
+      state.avtiveReserva=action.payload;
+    },
+    setNulActiveReserva:(state)=>{
+      state.avtiveReserva=null;
+    }
     // setActiveNote: (state, action)=>{
     //     state.activeNote= action.payload;
     //     state.messageSaved= '';
@@ -70,4 +92,4 @@ export const librarySlice = createSlice({
     
   },
 })
-export const {clearNotesLogout,savingNote, addNewEmptyNode,setActiveNote,setNotes,setSaving,noteUpdated,deleteNoteById,setPhotosToActiveNote} =librarySlice.actions
+export const {setNulActiveReserva,setActiveReserva,reservingBook,addNewReserve,setAllBooks,setAllBooksReserve,deleteReserve} =librarySlice.actions

@@ -30,3 +30,84 @@
 .btn-reserve:hover{
     text-decoration: underline;
 }
+
+.modal{
+    position: fixed;
+    width: 100%;
+    height:100vh;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.425);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cont-info-modal{
+    width: 600px;
+    background-color: #fff;
+    padding: 2rem;
+    border: solid 1px transparent;
+    border-radius: 10px;
+}
+.info-libro{
+    border: solid #000;
+    border-width: 0 0 2px 0;
+}
+.info-libro h3{
+    margin-bottom: 1rem;
+}
+.info-libro span{
+    font-weight:400 ;
+}
+
+.descr{
+    display: flex;
+    
+    border: solid #000;
+    border-width: 0 0 2px 0;
+    padding: 2rem 0;
+}
+.col-text{
+    width: 50%;
+    box-sizing: border-box;
+    padding-right: 1rem;
+}
+.col-img{
+    box-sizing: border-box;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1rem;
+}
+.footer-modal{
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+.footer-modal button{
+    padding: 10px 20px;
+    border: solid 1px transparent;
+    border-radius: 20px;
+    background-color: rgb(36, 22, 167);
+    color: #fff;
+    cursor: pointer;
+    
+}
+.footer-modal button:hover{
+background-color: rgb(68, 60, 136);
+}
+.close-modal{
+    display: flex;
+    justify-content: end;
+}
+.close-modal button{
+    padding: 10px 20px;
+    border: solid 1px transparent;
+    border-radius: 20px;
+    background-color: rgb(36, 22, 167);
+    color: #fff;
+    cursor: pointer;
+   
+}

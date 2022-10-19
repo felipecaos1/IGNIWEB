@@ -1,11 +1,21 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Header } from "../../component/Header";
+import { startDeleteReserve } from "../../store/library/thunks";
 import './profile.css'
 
 export const ProfilePage = () => {
 
-   const {displayName,photoUrl,email} = useSelector( state => state.auth)
+   const dispatch= useDispatch();
+
+   const {displayName,photoUrl,email} = useSelector( state => state.auth);
+   const {booksReserve} = useSelector( state => state.library);
+
+   const onDelete= (id)=>{
+
+      dispatch( startDeleteReserve(id));
+
+   }
  return(
     <>
      <Header/>
@@ -17,7 +27,7 @@ export const ProfilePage = () => {
                   <img src={photoUrl} alt="avatar"/>
                </div>
                <h3>{displayName}</h3>
-               <h4>Number of reserves: 5</h4>
+               <h4>Number of reserves: {booksReserve.legnth}</h4>
                <div className="btn-more-reserves">
                <Link to='/books'> + Book </Link>
                </div>
@@ -52,26 +62,21 @@ export const ProfilePage = () => {
                         </tr>
                      </thead>
                      <tbody>
-                        <tr>
-                           <th>Cien Años de soledad</th>
-                           <th>Gabriel Garcia Marquez</th>
-                           <th>19/10/2022</th>
+                        {
+                           booksReserve.map(book=>(
+                        <tr key={book.id}>
+                           <th>{book.title}</th>
+                           <th>{book.Author}</th>
+                           <th>{new Date(book.date).toDateString()}</th>
                            <th>
-                              <button className="btn-delete">
+                              <button onClick={()=>onDelete(book.id)} className="btn-delete">
                                  <img src="/assets/delete.png" alt="icono-borrar" />
                               </button>
                            </th>
                         </tr>
-                        <tr>
-                           <th>Cien Años de soledad</th>
-                           <th>Gabriel Garcia Marquez</th>
-                           <th>19/10/2022</th>
-                           <th>
-                              <button className="btn-delete">
-                                 <img src="/assets/delete.png" alt="icono-borrar" />
-                              </button>
-                           </th>
-                        </tr>
+                           ))
+                        }
+                       
                      </tbody>
                   </table>
                </div>

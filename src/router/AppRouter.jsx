@@ -6,16 +6,16 @@ import { Routes, Route, Link, Navigate } from "react-router-dom";
 import { LoginPage } from "../auth/pages/LoginPage";
 import { LoadingChecking } from "../component/LoadingChecking";
 import { FirebaseAuth } from "../firebase/config";
+
 import { LibraryRoutes } from "../LibraryApp/routes/LibraryRoutes";
 import { login, logout } from "../store/auth/authSlice";
+import { startLoadingBooks, startLoadingReserveBooks } from "../store/library/thunks";
 
 
 export const AppRouter = () => {
     const { status} = useSelector( state => state.auth);
     const dispatch = useDispatch();
     console.log(status);
-   
-  
     useEffect(()=>{
 
         //cuando  nos auntenticamos y recargamos o cerramos el navegador la autenticacion persiste 
@@ -30,11 +30,11 @@ export const AppRouter = () => {
           const {displayName, uid, email, photoURL} = user;
           //si encontramos un usuario autenticado hacemos login para que nuestro store se actualice  
           dispatch( login({displayName, uid, email, photoURL}));
+
+          dispatch(startLoadingBooks());
+          dispatch( startLoadingReserveBooks());
     
           //como sabemos que hay un usuario autenticado mandamos a cargar los libros de ese usuario
-    
-         //dispatch( startLoadingNotes());
-    
         })
     
       },[]

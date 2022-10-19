@@ -1,19 +1,82 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Header } from "../../component/Header"
+import { setActiveReserva, setNulActiveReserva } from "../../store/library/librarySlice";
+import { startNewBookReserve } from "../../store/library/thunks";
 import './book.css'
 
 export const BooksPage = () => {
+
+   const {allBooks,booksReserve,avtiveReserva} = useSelector( state => state.library);
+
+   const [filterbooks, setFilterbooks] = useState(allBooks);
+   
+  
+   const dispatch=useDispatch();
+
+   const showReserve =(bookReserve)=>{
+      dispatch (setActiveReserva(bookReserve));
+   }
+   const onReserve =(book=[])=>{
+      dispatch(startNewBookReserve(book));
+      dispatch( setNulActiveReserva());
+   }
+
+   const limpiarModal=()=>{
+      dispatch( setNulActiveReserva());
+   }
+
+   const onfilter = (Event)=>{
+      // console.log(Event.target.value);
+      const category=Event.target.value;
+
+      if(category!=='todas'){
+         const filterByCate = allBooks.filter(item=>item.categoria===category);
+         setFilterbooks(filterByCate);
+      }
+      else{
+         setFilterbooks(allBooks);
+      }
+
+   }
+
  return(
     <>
     <Header/>
+    <div className="modal" style={{display:!!avtiveReserva?'':'none'}}>
+       <div className="cont-info-modal">
+          <div className="close-modal">
+          <button  onClick={limpiarModal}>Cerrar</button>
+          </div>
+          <div className="info-libro">
+             
+             <h3>Book title: <span>{avtiveReserva?.titulo}</span></h3>
+             <h3>Author: <span>{avtiveReserva?.autor}</span></h3>
+             <h3>Category: <span>{avtiveReserva?.categoria}</span></h3>
+          </div>
+          <div className="descr">
+            <div className="col-text">
+               <h3>Description:</h3>
+               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error officia optio excepturi rem aut aliquam quia, reprehenderit maiores aperiam neque esse quos vero, id at quas temporibus a accusamus sapiente.</p>
+            </div>
+            <div className="col-img">
+               <img src="/assets/Igniweb-logo.png" alt="" />
+            </div>
+          </div>
+          <div className="footer-modal">
+             <button onClick={()=>onReserve(avtiveReserva)}>Reserve</button>
+          </div>
+       </div>
+    </div>
     <div className="container-books">
          <div className="col-filter">
             <div className="wraper-filter">
                <h3>Filter by Category</h3>
-               <select name="category" id="filterCategory">
-                  <option selected>Todas</option>
+               <select onChange={(Event)=>onfilter(Event)} defaultValue='' name="category" id="filterCategory">
+                  <option value='todas' selected>Todas</option>
                   <option value='romance'>Romance</option>
-                  <option value='novelas'>Novelas</option>
-                  <option value='avrntura'>Aventura</option>
+                  <option value='novela'>Novelas</option>
+                  <option value='aventura'>Aventura</option>
                </select>
             </div>
          </div>
@@ -26,31 +89,26 @@ export const BooksPage = () => {
                         <tr>
                            <th>Title</th>
                            <th>Author</th>
-                           <th>Date</th>
+                           <th>Category</th>
                            <th>Action</th>
                         </tr>
                      </thead>
                      <tbody>
-                        <tr>
-                           <th>Cien Años de soledad</th>
-                           <th>Gabriel Garcia Marquez</th>
-                           <th>19/10/2022</th>
-                           <th>
-                              <button className="btn-reserve">
+                        {
+                           filterbooks.map(book=>(
+                           <tr key={book.id}>
+                              <th>{book.titulo}</th>
+                              <th>{book.autor}</th>
+                              <th>{book.categoria}</th>
+                              <th>
+                              <button onClick={()=>showReserve(book)} className="btn-reserve">
                                  Reservar
                               </button>
                            </th>
-                        </tr>
-                        <tr>
-                           <th>Cien Años de soledad</th>
-                           <th>Gabriel Garcia Marquez</th>
-                           <th>19/10/2022</th>
-                           <th>
-                              <button className="btn-reserve">
-                                 Reservar
-                              </button>
-                           </th>
-                        </tr>
+                           </tr>
+                           ))
+                        }
+                        
                      </tbody>
                   </table>
                </div>
