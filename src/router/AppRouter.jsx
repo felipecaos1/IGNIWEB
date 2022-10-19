@@ -39,9 +39,9 @@ export const AppRouter = () => {
     
       },[]
       )
-    //   if (status === 'checking'){
-    //     return <LoadingChecking/>
-    //     }
+      if (status === 'checking'){
+        return <LoadingChecking/>
+        }
  return(
     <>
         <Routes>

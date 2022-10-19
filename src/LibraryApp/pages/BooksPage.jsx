@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Header } from "../../component/Header"
 import { setActiveReserva, setNulActiveReserva } from "../../store/library/librarySlice";
@@ -6,13 +6,25 @@ import { startNewBookReserve } from "../../store/library/thunks";
 import './book.css'
 
 export const BooksPage = () => {
-
+   
+   const dispatch=useDispatch();
    const {allBooks,booksReserve,avtiveReserva} = useSelector( state => state.library);
 
-   const [filterbooks, setFilterbooks] = useState(allBooks);
+   const [filterByReserve, setFilterByReserve] = useState(allBooks);
+   const [filterbooks, setFilterbooks] = useState(filterByReserve);
    
-  
-   const dispatch=useDispatch();
+   useEffect(()=>{
+      booksReserve.forEach(element => {
+         const filterb = allBooks.filter(item=>item.id!==element.id_libro)
+         if (filterb.length===0){
+            setFilterByReserve(allBooks);
+         }
+         else{
+            setFilterByReserve(filterb);
+         }
+      });  
+   },[booksReserve])
+
 
    const showReserve =(bookReserve)=>{
       dispatch (setActiveReserva(bookReserve));
@@ -20,6 +32,7 @@ export const BooksPage = () => {
    const onReserve =(book=[])=>{
       dispatch(startNewBookReserve(book));
       dispatch( setNulActiveReserva());
+      
    }
 
    const limpiarModal=()=>{
@@ -31,15 +44,14 @@ export const BooksPage = () => {
       const category=Event.target.value;
 
       if(category!=='todas'){
-         const filterByCate = allBooks.filter(item=>item.categoria===category);
+         const filterByCate = filterByReserve.filter(item=>item.categoria===category);
          setFilterbooks(filterByCate);
       }
       else{
-         setFilterbooks(allBooks);
+         setFilterbooks(filterByReserve);
       }
 
    }
-
  return(
     <>
     <Header/>

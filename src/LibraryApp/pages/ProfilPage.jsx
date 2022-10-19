@@ -24,10 +24,10 @@ export const ProfilePage = () => {
          <div className="col-data">
             <div className="wraper-data">
                <div className="wraper-img">
-                  <img src={photoUrl} alt="avatar"/>
+                  <img width='100px' src={!photoUrl?'/assets/deafult.png':photoUrl} alt="avatar"/>
                </div>
-               <h3>{displayName}</h3>
-               <h4>Number of reserves: {booksReserve.legnth}</h4>
+               <h3>{!displayName?email.split('@')[0]:displayName}</h3>
+               <h4>Number of reserves: {booksReserve.length}</h4>
                <div className="btn-more-reserves">
                <Link to='/books'> + Book </Link>
                </div>

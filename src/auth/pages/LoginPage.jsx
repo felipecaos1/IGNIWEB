@@ -5,7 +5,7 @@ import { startGogleSignIn, startLoginWithEmail } from '../../store/auth/thunks';
 import './login.css'
 
 const loginData={
-   email:'andresfelipecao@gmail.com',
+   email:'felipe@gmail.com',
    password:'123456'
  }
 
