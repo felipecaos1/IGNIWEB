@@ -1,0 +1,32 @@
+.container-books{
+    display: flex;
+    padding: 3rem;
+}
+.col-filter{
+    width: 30%;
+    padding: 1rem;
+}
+.col-reservas{
+    width: 70%;
+    padding: 1rem;
+}
+.wraper-filter{
+    background-color: rgb(241, 241, 241);
+    border: solid 1px transparent;
+    border-radius: 10px;
+    padding: 2rem;
+    
+}
+#filterCategory{
+    padding: 05px 10px;
+    width: 50%;
+    margin-top: 1rem;
+}
+.btn-reserve{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.btn-reserve:hover{
+    text-decoration: underline;
+}
