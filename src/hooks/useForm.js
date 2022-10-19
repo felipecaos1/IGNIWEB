@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
+
+//* este archivo es un custom hook que permite manejar formularios, cuando se usa se le debe enviar el esta inicial que correspone a los names de los campos del formulario
 export const useForm = ( initialForm = {}, formValidations =[] ) => {
   
     const [ formState, setFormState ] = useState( initialForm );

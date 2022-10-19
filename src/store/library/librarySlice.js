@@ -1,3 +1,5 @@
+
+//* este archivo se encarga establecer la infoamcion referente a los libros en el global store 
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
@@ -24,70 +26,35 @@ export const librarySlice = createSlice({
     reservingBook:(state)=>{
       state.isreserving=true;
     },
+    //* accion para agregar una nueva reserva al array de reservas 
     addNewReserve: (state, action) => {
       state.booksReserve.push(action.payload); 
       state.isreserving = false;
     },
+    //* accin que establece en el global  store los libros obtenidos de la base de datos al inicia sesion 
     setAllBooks:(state, action)=>{
       state.allBooks=action.payload;
     },
-
+//* accion que establece en el global store las reservas obtenidas de la base de datos 
     setAllBooksReserve : ( state, action)=>{
         state.booksReserve=action.payload;
     },
+
+    //* accion que borra una reserva del global store 
     deleteReserve: (state, {payload})=>{
         console.log(payload.id);
         state.booksReserve = state.booksReserve.filter( book =>book.id!==payload);
       //   state.activeNote=null;
     },
-
+// * accion par poner activo el libro que se quiere reservar 
     setActiveReserva:( state, action) =>{
       state.avtiveReserva=action.payload;
     },
+    
     setNulActiveReserva:(state)=>{
       state.avtiveReserva=null;
     }
-    // setActiveNote: (state, action)=>{
-    //     state.activeNote= action.payload;
-    //     state.messageSaved= '';
-    // },
-
-    // setNotes:(state, action)=>{
-    //   state.notes = action.payload;
-    // },
-    // setSaving: (state)=>{
-    //   state.isSaving=true;
-    //   state.messageSaved= ''
-    // },
-    // noteUpdated:(state, {payload})=>{
-    //   state.isSaving=false;
-
-    //   state.notes = state.notes.map( note =>{
-    //     if( note.id === payload.id){
-    //       return payload;
-    //     }
-
-    //     return note;
-    //   });
-
-    //   state.messageSaved= `La nota se actualizo correctamente.`
-    // },
-    // setPhotosToActiveNote:(state, {payload})=>{
-    //   state.activeNote.imagesUrl = [...state.activeNote.imagesUrl, ...payload];
-    //    state.isSaving=false;
-    // },
-    // clearNotesLogout:(state)=>{
-    //   state.isSaving=false;
-    //   state.messageSaved='';
-    //   state.notes=[];
-    //   state.activeNote=null;
-    // },
     
-    // deleteNoteById: (state, {payload})=>{
-    //   console.log(payload.id);
-    //   state.notes = state.notes.filter( note =>note.id!==payload)
-    //   state.activeNote=null;
-    // }
     
     
   },

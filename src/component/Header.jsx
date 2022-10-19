@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux';
 import './loading.css'
 import { startLogout } from '../store/auth/thunks';
 
+//* componente headear usado en varias vistas 
 export const Header = () => {
 
-    const dispatch = useDispatch();
-
+    const dispatch = useDispatch();//* hook que me permite enviar acciones a  redux 
+    
+    //* Funcion que inicia el proceso de cerrrar sesión 
     const onLogout =() =>{
         dispatch( startLogout());
     }

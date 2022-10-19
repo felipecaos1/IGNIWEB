@@ -4,17 +4,21 @@ import { Header } from "../../component/Header";
 import { startDeleteReserve } from "../../store/library/thunks";
 import './profile.css'
 
+
+//* functional component que renderiza la pagian del perfil de usuario 
+
 export const ProfilePage = () => {
 
+   //* hook para despachar acciones del store
    const dispatch= useDispatch();
 
+   //* hook para traer valores del global store 
    const {displayName,photoUrl,email} = useSelector( state => state.auth);
    const {booksReserve} = useSelector( state => state.library);
 
+   //* funcion que inicia el proceso de borrado de una reserva 
    const onDelete= (id)=>{
-
       dispatch( startDeleteReserve(id));
-
    }
  return(
     <>
@@ -52,6 +56,7 @@ export const ProfilePage = () => {
             <div className="wraper-reserves">
                <h3>My Reserves</h3>
                <div className="wraper-table">
+                  
                   <table>
                      <thead>
                         <tr>

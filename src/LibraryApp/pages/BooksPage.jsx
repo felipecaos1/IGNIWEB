@@ -5,6 +5,8 @@ import { setActiveReserva, setNulActiveReserva } from "../../store/library/libra
 import { startNewBookReserve } from "../../store/library/thunks";
 import './book.css'
 
+
+
 export const BooksPage = () => {
    
    const dispatch=useDispatch();
@@ -94,7 +96,7 @@ export const BooksPage = () => {
          </div>
          <div className="col-reservas">
             <div className="wraper-reserves">
-               <h3>My Reserves</h3>
+               <h3>Books </h3>
                <div className="wraper-table">
                   <table>
                      <thead>

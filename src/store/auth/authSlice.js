@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+//* este archivo corresponde a nuestro reducer, desde aca se va a controlar las acciones y la info que se guardara en el global store para poder se accedidad desde cualquier puento de la aplicacion 
+
 const initialState = {
   status:'checking', //, checking, authenticate, not-authenticate
   uid: null,
@@ -13,6 +15,8 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+
+    //* accion de login, se recibe y se asigna la info obtenida de los procesos asincronos con la base de datos, en este peunto nuestra aplicaion ya sabe que hay alguien logueado
     login: (state, { payload}) => {
        
         state.status='authenticate', //, cheking, authenticate
@@ -22,6 +26,8 @@ export const authSlice = createSlice({
         state.photoUrl= payload.photoURL;
         state.errorMessage= null;
     },
+
+    //* accion para hacer logout de la aplicacion, nuwestras variables globales se reestablecen y asi nuestra aplicacion sabe que han cerrado session 
 
     logout: (state, {payload}) =>{
         
@@ -33,6 +39,7 @@ export const authSlice = createSlice({
         state.errorMessage= payload;
     },
 
+    //*accion para poner en estado de loading la aplicacion, asi saber que se esta esperando una respuesta  
     checkingCredential: ( state ) =>{
         state.status ='checking';
     },
