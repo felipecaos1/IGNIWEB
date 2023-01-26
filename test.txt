@@ -4,3 +4,5 @@ Esto es una prueba de como clonar y bajar cambios de un repositorio en SourceTre
 Genero un cambio en mi local
 
 Nueva linea desde otra rama
+
+cambio en local y en otra rama
